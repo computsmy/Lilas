@@ -8,7 +8,7 @@
             <field name="arch" type="xml">
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='name']" position="after">
                     <field name="product_is_fabric_or_use_fabric" invisible="1"/>
-                    <field name="related_sale_order_line" invisible="1"/>
+                    <field name="related_sale_order_line" invisible="0"/>
                     <button name="fabric_configurator" type="object" class="btn-primary" string="Fabric" context="{'default_sale_order_line_id':active_id}" attrs="{'invisible':[('product_is_fabric_or_use_fabric','=','is_fabric')]}"/>
                 </xpath>
             </field>

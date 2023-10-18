@@ -7,3 +7,7 @@ class ProductTemplate(models.Model):
         ('is_fabric','Is Fabric'),
         ('use_fabric','Use Fabric')
     ])
+
+    front_size = fields.Float('Front LM')
+    back_size = fields.Float('Back LM')
+

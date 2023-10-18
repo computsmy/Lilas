@@ -8,10 +8,10 @@
                 <sheet>
                     <group>
                         <group>
-                            <field name="both_same_fabric"/>
-                            <field name="fabric_top" string="Fabric" domain="[('product_is_fabric_or_use_fabric','=','is_fabric')]" options="{'no_quick_create_edit':True}" attrs="{'invisible':[('both_same_fabric','=',True)]}"/>
-                            <field name="fabric_top" domain="[('product_is_fabric_or_use_fabric','=','is_fabric')]" options="{'no_quick_create_edit':True}" attrs="{'invisible':[('both_same_fabric','=',False)]}"/>
-                            <field name="fabric_bottom" domain="[('product_is_fabric_or_use_fabric','=','is_fabric')]" options="{'no_quick_create_edit':True}" attrs="{'invisible':[('both_same_fabric','=',False)]}"/>
+                            <field name="use_multiple_fabric"/>
+                            <field name="fabric_front" string="Fabric" domain="[('product_is_fabric_or_use_fabric','=','is_fabric')]" options="{'no_quick_create_edit':True}" attrs="{'invisible':[('use_multiple_fabric','=',True)]}"/>
+                            <field name="fabric_front" domain="[('product_is_fabric_or_use_fabric','=','is_fabric')]" options="{'no_quick_create_edit':True}" attrs="{'invisible':[('use_multiple_fabric','=',False)]}"/>
+                            <field name="fabric_back" domain="[('product_is_fabric_or_use_fabric','=','is_fabric')]" options="{'no_quick_create_edit':True}" attrs="{'invisible':[('use_multiple_fabric','=',False)]}"/>
                         </group>
                         <group>
                             <field name="sale_id" invisible="1"/>

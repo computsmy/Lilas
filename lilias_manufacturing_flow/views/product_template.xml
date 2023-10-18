@@ -9,6 +9,8 @@
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='detailed_type']" position="after">
                     <field name="product_is_fabric_or_use_fabric" widget="radio" options="{'horizontal':True}" help="Will appear in product variant configurator."/>
+                    <field name="front_size" attrs="{'invisible':[('product_is_fabric_or_use_fabric','=','is_fabric')]}"/>
+                    <field name="back_size" attrs="{'invisible':[('product_is_fabric_or_use_fabric','=','is_fabric')]}"/>
                 </xpath>
             </field>
         </record>
