@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template id="template_inherit_product" inherit_id="sale_product_configurator.configure_optional_products">
+        <xpath expr="//tr[hasclass('js_product')]" position="after">
+            <tr>
+                <td class="text-center">
+                    <select>
+                        <t t-foreach="request.env['product.template'].search([('product_is_fabric_or_use_fabric','=','is_fabric')])" t-as="product">
+                            <option t-att-value="product.id" t-esc="product.name"/>
+                        </t>
+                    </select>
+                </td>
+            </tr>
+        </xpath>
+    </template>
+</odoo>

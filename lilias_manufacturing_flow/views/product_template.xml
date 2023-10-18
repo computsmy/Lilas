@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<odoo>
+    <data>
+        <record id="product_template_fabric_form" model="ir.ui.view">
+            <field name="name">product_template_fabric_form</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='detailed_type']" position="after">
+                    <field name="product_is_fabric_or_use_fabric" widget="radio" options="{'horizontal':True}" help="Will appear in product variant configurator."/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
