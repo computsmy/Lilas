@@ -14,6 +14,8 @@ class FabricConfiguratorWizard(models.TransientModel):
     def confirm_fabric(self):
         for record in self:
             fabric_records = record.env['sale.order.line'].search([('related_sale_order_line','=',record.sale_order_line_id.id)])
+            qty_1 = record.sale_order_line_id.product_id.front_size
+            qty_2 = record.sale_order_line_id.product_id.back_size
             if fabric_records:
                 for i in fabric_records:
                     i.unlink()
@@ -23,6 +25,7 @@ class FabricConfiguratorWizard(models.TransientModel):
                         'product_id': record.fabric_front.id,
                         'name': f'Fabric for {record.sale_order_line_id.name}',
                         'fabric_position': 'both',
+                        'product_uom_qty' : record.sale_order_line_id.product_uom_qty * (qty_1 + qty_2) ,
                         'related_sale_order_line': record.sale_order_line_id.id
                     })]
                 })
@@ -32,11 +35,13 @@ class FabricConfiguratorWizard(models.TransientModel):
                         'product_id': record.fabric_front.id,
                         'name': f'Fabric for {record.sale_order_line_id.name}',
                         'fabric_position': 'front',
+                        'product_uom_qty': record.sale_order_line_id.product_uom_qty * qty_1,
                         'related_sale_order_line': record.sale_order_line_id.id
                     }), Command.create({
                         'product_id': record.fabric_back.id,
                         'name': f'Fabric for {record.sale_order_line_id.name}',
                         'fabric_position': 'back',
+                        'product_uom_qty': record.sale_order_line_id.product_uom_qty * qty_2,
                         'related_sale_order_line': record.sale_order_line_id.id
                     })
                     ]

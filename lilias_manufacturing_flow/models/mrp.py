@@ -16,18 +16,18 @@ class Manufacturing(models.Model):
                         res.write({
                             'move_raw_ids': [Command.create({
                                 'product_id': fabric_ids.product_id.id,
-                                'product_uom_qty' : sale_order_line_id.product_id.front_size + sale_order_line_id.product_id.back_size
+                                'product_uom_qty' : sale_order_line_id.product_uom_qty * (sale_order_line_id.product_id.front_size + sale_order_line_id.product_id.back_size)
                             })]
                         })
                     else:
                         res.write({
                             'move_raw_ids': [Command.create({
                                 'product_id': fabric_ids[0].product_id.id,
-                                'product_uom_qty' : sale_order_line_id.product_id.front_size
+                                'product_uom_qty' : sale_order_line_id.product_uom_qty * sale_order_line_id.product_id.front_size
                             }),
                             Command.create({
                                 'product_id': fabric_ids[1].product_id.id,
-                                'product_uom_qty': sale_order_line_id.product_id.back_size
+                                'product_uom_qty': sale_order_line_id.product_uom_qty * sale_order_line_id.product_id.back_size
                             })
                             ]
                         })
