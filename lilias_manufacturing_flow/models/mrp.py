@@ -12,8 +12,8 @@ class Manufacturing(models.Model):
             old_data = res.move_raw_ids
             if data.product_id:
                 sales_order_id = self.env['sale.order'].search([('name','=',data.origin)])
-                sale_order_line_id = self.env['sale.order.line'].search([('order_id','=',sales_order_id.id),('product_is_fabric_or_use_fabric','=','use_fabric'),('product_id','=',data.product_id.id)],limit=1)
-                fabric_ids = self.env['sale.order.line'].search([('product_is_fabric_or_use_fabric','=','is_fabric'),('related_sale_order_line','=',sale_order_line_id.id)])
+                sale_order_line_id = self.env['sale.order.line'].search([('order_id','=',sales_order_id.id),('use_fabric','=',True),('product_id','=',data.product_id.id)],limit=1)
+                fabric_ids = self.env['sale.order.line'].search([('is_fabric','=',True),('related_sale_order_line','=',sale_order_line_id.id)])
                 if sale_order_line_id:
                     if len(fabric_ids) == 1:
                         data.write({
@@ -40,4 +40,5 @@ class Manufacturing(models.Model):
 class StockMove(models.Model):
     _inherit = "stock.move"
 
-    product_is_fabric_or_use_fabric = fields.Selection(related='product_id.product_tmpl_id.product_is_fabric_or_use_fabric')
+    is_fabric = fields.Boolean('Is Fabric', related='product_tmpl_id.is_fabric')
+    use_fabric = fields.Boolean('Use Fabric', related='product_tmpl_id.use_fabric')

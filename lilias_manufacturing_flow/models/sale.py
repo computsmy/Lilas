@@ -12,7 +12,8 @@ class SalesOrderLine(models.Model):
         ('back','Back'),
         ('both','Both')
     ])
-    product_is_fabric_or_use_fabric = fields.Selection(related='product_template_id.product_is_fabric_or_use_fabric')
+    is_fabric = fields.Boolean('Is Fabric',related='product_template_id.is_fabric')
+    use_fabric = fields.Boolean('Use Fabric',related='product_template_id.use_fabric')
     related_sale_order_line = fields.Many2one('sale.order.line')
 
 
@@ -30,5 +31,4 @@ class SalesOrderLine(models.Model):
             'target': 'new',
             'context': {'default_sale_order_line_id': 'active_id'}
         }
-        print('it runs actually')
 

@@ -28,6 +28,7 @@
         'views/product_template.xml',
         'views/sale.xml',
         'wizard/fabric_configurator_wizard.xml',
+        'views/stock_route.xml',
         # 'static/src/views/templates.xml'
     ],
     # 'assets':{

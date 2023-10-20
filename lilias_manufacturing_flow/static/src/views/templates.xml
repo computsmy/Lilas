@@ -5,7 +5,7 @@
             <tr>
                 <td class="text-center">
                     <select>
-                        <t t-foreach="request.env['product.template'].search([('product_is_fabric_or_use_fabric','=','is_fabric')])" t-as="product">
+                        <t t-foreach="request.env['product.template'].search([('is_fabric','=',True)])" t-as="product">
                             <option t-att-value="product.id" t-esc="product.name"/>
                         </t>
                     </select>

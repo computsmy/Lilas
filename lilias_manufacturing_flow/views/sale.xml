@@ -10,9 +10,10 @@
                     <attribute name="default_order">id</attribute>
                 </xpath>
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='name']" position="after">
-                    <field name="product_is_fabric_or_use_fabric" optional="hide"/>
                     <field name="related_sale_order_line" optional="hide"/>
-                    <button name="fabric_configurator" type="object" class="btn-primary" string="Fabric" context="{'default_sale_order_line_id':active_id}" attrs="{'invisible':['|',('product_is_fabric_or_use_fabric','in',['is_fabric',False]),('state','in',['sale','done'])]}"/>
+                    <field name="is_fabric"/>
+                    <field name="use_fabric"/>
+                    <button name="fabric_configurator" type="object" class="btn-primary" string="Fabric" context="{'default_sale_order_line_id':active_id}" attrs="{'invisible':['|','|',('is_fabric','=',True),('use_fabric','=',False),('state','in',['sale','done'])]}"/>
                 </xpath>
             </field>
         </record>

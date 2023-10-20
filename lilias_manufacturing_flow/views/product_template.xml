@@ -7,18 +7,18 @@
             <field name="model">product.template</field>
             <field name="inherit_id" ref="product.product_template_form_view"/>
             <field name="arch" type="xml">
-                <xpath expr="//notebook[1]" position="inside">
-                    <page string="Product Configuration">
-                        <group>
-                            <group>
-                                <field name="product_is_fabric_or_use_fabric" widget="radio" options="{'horizontal':True}" help="Will appear in product variant configurator."/>
-                            </group>
-                            <group>
-                                <field name="front_size" string="Front Fabric QTY" attrs="{'invisible':[('product_is_fabric_or_use_fabric','=','is_fabric')]}"/>
-                                <field name="back_size" string="Back Fabric QTY" attrs="{'invisible':[('product_is_fabric_or_use_fabric','=','is_fabric')]}"/>
-                            </group>
-                        </group>
-                    </page>
+
+                <xpath expr="//div[@name='options']" position="inside">
+                    <span class="d-inline-block">
+                        <field name="is_fabric"/>
+                        <label for="is_fabric"/>
+                    </span>
+                </xpath>
+                <xpath expr="//group[@name='operations']" position="inside">
+                    <field name="show_use_fabric" invisible="1"/>
+                    <field name="use_fabric" attrs="{'invisible':[('show_use_fabric','=',False)]}"/>
+                    <field name="front_size" string="Front Fabric QTY" attrs="{'invisible':[('use_fabric','=',False)]}"/>
+                    <field name="back_size" string="Back Fabric QTY" attrs="{'invisible':[('use_fabric','=',False)]}"/>
                 </xpath>
             </field>
         </record>
