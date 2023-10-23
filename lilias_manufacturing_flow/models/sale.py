@@ -15,8 +15,14 @@ class SalesOrderLine(models.Model):
     is_fabric = fields.Boolean('Is Fabric',related='product_template_id.is_fabric')
     use_fabric = fields.Boolean('Use Fabric',related='product_template_id.use_fabric')
     related_sale_order_line = fields.Many2one('sale.order.line')
+    r_id = fields.Integer(related='related_sale_order_line.id')
 
-
+    @api.model
+    def create(self,vals):
+        res = super(SalesOrderLine,self).create(vals)
+        if res.use_fabric:
+            res['related_sale_order_line'] = res.id
+        return res
     def fabric_configurator(self):
         wizard = self.env['fabric.configurator.wizard'].create({
 

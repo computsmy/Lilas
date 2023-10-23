@@ -18,7 +18,10 @@ class FabricConfiguratorWizard(models.TransientModel):
             qty_2 = record.sale_order_line_id.product_id.back_size
             if fabric_records:
                 for i in fabric_records:
-                    i.unlink()
+                    if i.id == i.related_sale_order_line.id:
+                        pass
+                    else:
+                        i.unlink()
             if not record.use_multiple_fabric:
                 record.sale_id.write({
                     'order_line': [Command.create({
