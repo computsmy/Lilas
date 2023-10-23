@@ -10,8 +10,8 @@
                     <attribute name="default_order">r_id ASC,seq_fabric ASC,sequence</attribute>
                 </xpath>
                 <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='name']" position="after">
-                    <field name="seq_fabric"/>
-                    <field name="r_id" invisible="0"/>
+                    <field name="seq_fabric" invisible="1"/>
+                    <field name="r_id" invisible="1"/>
                     <field name="related_sale_order_line" invisible="1"/>
                     <field name="is_fabric" optional="hide"/>
                     <field name="use_fabric" optional="hide"/>
