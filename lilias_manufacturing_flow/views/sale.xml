@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="sale_order_fabric_inherit" model="ir.ui.view">
+            <field name="name">sale_order_fabric_inherit</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]" position="attributes">
+                    <attribute name="default_order">id</attribute>
+                </xpath>
+                <xpath expr="//form[1]/sheet[1]/notebook[1]/page[@name='order_lines']/field[@name='order_line']/tree[1]/field[@name='name']" position="after">
+                    <field name="related_sale_order_line" optional="hide"/>
+                    <field name="is_fabric"/>
+                    <field name="use_fabric"/>
+                    <button name="fabric_configurator" type="object" class="btn-primary" string="Fabric" context="{'default_sale_order_line_id':active_id}" attrs="{'invisible':['|','|',('is_fabric','=',True),('use_fabric','=',False),('state','in',['sale','done'])]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

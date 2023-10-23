@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="fabric_configurator_wizard" model="ir.ui.view">
+        <field name="name">fabric_configurator_wizard</field>
+        <field name="model">fabric.configurator.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="use_multiple_fabric"/>
+                            <field name="fabric_front" string="Fabric" domain="[('is_fabric','=',True)]" options="{'no_quick_create_edit':True}" attrs="{'invisible':[('use_multiple_fabric','=',True)]}"/>
+                            <field name="fabric_front" domain="[('is_fabric','=',True)]" options="{'no_quick_create_edit':True}" attrs="{'invisible':[('use_multiple_fabric','=',False)]}"/>
+                            <field name="fabric_back" domain="[('is_fabric','=',True)]" options="{'no_quick_create_edit':True}" attrs="{'invisible':[('use_multiple_fabric','=',False)]}"/>
+                        </group>
+                        <group>
+                            <field name="sale_id" invisible="1"/>
+                            <field name="sale_order_line_id" invisible="1"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="confirm_fabric" type="object" class="btn-primary" string="Confirm"/>
+                    <button name="Cancel" class="btn-secondary" string="Cancel" special="cancel"/>
+                    </footer>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

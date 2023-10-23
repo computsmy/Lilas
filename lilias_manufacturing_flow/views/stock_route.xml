@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="stock_route_fabric_inherit" model="ir.ui.view">
+        <field name="name">stock_route_fabric_inherit</field>
+        <field name="model">stock.route</field>
+        <field name="inherit_id" ref="stock.stock_location_route_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='product_selectable']" position="after">
+                <field name="enable_fabric" string="Enable Fabric"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
