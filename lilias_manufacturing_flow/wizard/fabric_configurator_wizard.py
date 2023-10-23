@@ -18,7 +18,7 @@ class FabricConfiguratorWizard(models.TransientModel):
             qty_2 = record.sale_order_line_id.product_id.back_size
             if fabric_records:
                 for i in fabric_records:
-                    if i.id == i.related_sale_order_line.id:
+                    if i.id == i.related_sale_order_line.id or i.display_type == 'line_section':
                         pass
                     else:
                         i.unlink()
@@ -29,7 +29,8 @@ class FabricConfiguratorWizard(models.TransientModel):
                         'name': f'Fabric for {record.sale_order_line_id.name}',
                         'fabric_position': 'both',
                         'product_uom_qty' : record.sale_order_line_id.product_uom_qty * (qty_1 + qty_2) ,
-                        'related_sale_order_line': record.sale_order_line_id.id
+                        'related_sale_order_line': record.sale_order_line_id.id,
+                        'seq_fabric' : 3
                     })]
                 })
             else:
@@ -39,13 +40,15 @@ class FabricConfiguratorWizard(models.TransientModel):
                         'name': f'Fabric for {record.sale_order_line_id.name}',
                         'fabric_position': 'front',
                         'product_uom_qty': record.sale_order_line_id.product_uom_qty * qty_1,
-                        'related_sale_order_line': record.sale_order_line_id.id
+                        'related_sale_order_line': record.sale_order_line_id.id,
+                        'seq_fabric': 3
                     }), Command.create({
                         'product_id': record.fabric_back.id,
                         'name': f'Fabric for {record.sale_order_line_id.name}',
                         'fabric_position': 'back',
                         'product_uom_qty': record.sale_order_line_id.product_uom_qty * qty_2,
-                        'related_sale_order_line': record.sale_order_line_id.id
+                        'related_sale_order_line': record.sale_order_line_id.id,
+                        'seq_fabric': 4
                     })
                     ]
                 })

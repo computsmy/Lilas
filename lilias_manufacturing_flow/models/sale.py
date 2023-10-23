@@ -16,12 +16,21 @@ class SalesOrderLine(models.Model):
     use_fabric = fields.Boolean('Use Fabric',related='product_template_id.use_fabric')
     related_sale_order_line = fields.Many2one('sale.order.line')
     r_id = fields.Integer(related='related_sale_order_line.id')
+    seq_fabric = fields.Integer('Sequence Fabric')
 
     @api.model
     def create(self,vals):
         res = super(SalesOrderLine,self).create(vals)
         if res.use_fabric:
             res['related_sale_order_line'] = res.id
+            res['seq_fabric'] = 2
+            self.env['sale.order.line'].create({
+                'display_type':'line_section',
+                'name':res.product_id.name,
+                'related_sale_order_line': res.id,
+                'order_id' : res.order_id.id,
+                'seq_fabric' : 1
+            })
         return res
     def fabric_configurator(self):
         wizard = self.env['fabric.configurator.wizard'].create({
@@ -37,4 +46,6 @@ class SalesOrderLine(models.Model):
             'target': 'new',
             'context': {'default_sale_order_line_id': 'active_id'}
         }
+
+
 
